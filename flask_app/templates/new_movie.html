@@ -1,0 +1,110 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <div>
+            <a class="navbar-brand">MyMovies</a>
+        </div>
+        <div>
+            <a href="/movies/account">My Movies</a> |
+            <a href="/movies/dashboard">Dashboard</a> |
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div>
+                    {% with messages = get_flashed_messages() %}
+                    <!-- declare a variable called messages -->
+                    {% if messages %}
+                    <!-- check if there are any messages -->
+                    {% for message in messages %}
+                    <!-- loop through the messages -->
+                    <p>{{message}}</p> <!-- display each message in a paragraph tag -->
+                    {% endfor %}
+                    {% endif %}
+
+                    {% endwith %}
+                </div>
+                <form action="/movies/create" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" class="form-control" name="title" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="release_year">Year released:</label>
+                        <input type="number" class="form-control" name="release_year" id="release_year" placeholder="2022" value="2022">
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Select the movie genre:</label>
+                        <select class="form-control" id="genre" name="genre">
+                            <option value="none" selected disabled hidden>
+                                Select a genre
+                            </option>
+                            <option value="action">Action</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rating" class="control-label">Rating</label>
+                        <input id="rating" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="5">
+                    </div>
+<!--                     <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <select class="form-control" id="rating" name="rating">
+                            <option value="none" selected disabled hidden>
+                                Select a score
+                            </option>
+                            <option value="10">10</option>
+                            <option value="9">9</option>
+                            <option value="8">8</option>
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="note">Comment:</label>
+                        <textarea class="form-control" rows="5" id="note" name="note"></textarea>
+                    </div>
+                    <div class="form-group"> 
+                        <label class="control-label" for="date">Date watched</label>
+                        <input class="form-control" id="watch_date" name="watch_date" placeholder="MM/DD/YYYY" type="date">
+                    </div>
+<!--                     <div class="form-group">
+                        <label for="file">Cover image</label>
+                        <input type="file" class="form-control-file" id="image_path" name="file">
+                    </div> -->
+                    <input type="hidden" name="user_id" value="{{session['user_id']}}">
+                    <button type="submit" class="btn btn-primary mb-2">Add</button>
+                    <button type="submit" class="btn btn-primary mb-2">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

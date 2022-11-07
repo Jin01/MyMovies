@@ -1,0 +1,80 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+    <title>Home</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <div>
+            <a class="navbar-brand">MyMovies</a>
+        </div>
+        <div>
+            <a href="/movies/dashboard">Dashboard</a> |
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h5>Manage your favorite movies here!</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Year Released</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Date Watched</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in user_movies.movies%}
+                <tr>
+                    <td>
+                        <a href="/movies/show/{{movie.id}}"> {{movie.title}} </a>
+                    </td>
+                    <td>
+                        {{ movie.release_year }}
+                    </td>
+                    <td>
+                        {{movie.genre}}
+                    </td>
+                    <td>
+                        {% for i in range(0,movie.rating) %}
+                        <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in range(0,5-movie.rating) %}
+                        <span class="fa fa-star"></span>
+                        {% endfor %}
+<!--                         {% for i in range(0,movie.rating) %}
+                        <span class="fa fa-star checked"></span>
+                        {% endfor %} -->
+                    </td>
+                    <td>
+                        {{ movie.watch_date }}
+                    </td>
+                    <td>
+                        <a href="/movies/delete/{{movie.id}}">Delete</a> |
+                        <a href="/movies/edit/{{movie.id}}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/movies/new">Add New Movie</a>
+    </div>
+
+</body>
+
+</html>

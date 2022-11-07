@@ -1,0 +1,14 @@
+Project name: MyMovie Manager
+Description: Manage the movies user have watched
+Stack: Python/MySQL
+
+Features:
+User write/read access to their own movie
+Guest read only access to all movie list 
+BootStrap 
+
+Product backlog:
+Searching
+Pulling information from IMDb 
+
+Github Repo:https://github.com/Jin01/MyMovie.git
